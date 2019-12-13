@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: dev #默认为开发环境
+  freemarker:
+    suffix: .html
+    request-context-attribute: request
+server:
+  port: 8080
+  error:
+    path: /error
+

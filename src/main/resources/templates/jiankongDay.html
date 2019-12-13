@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/1.2.3/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts-en.common.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            font-family: "微软雅黑";
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        body,
+        h1,
+        h3,
+        h2,
+        h4,
+        h5,
+        h6,
+        p,
+        dl,
+        dd,
+        ul,
+        li,
+        ol,
+        td,
+        form,
+        input,
+        fieldset,
+        legend {
+            margin: 0;
+            padding: 0;
+            font-weight: 500;
+        }
+
+        .jiankongribao {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+        }
+
+        .header {
+            width: 800px;
+            height: 140px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, rgba(70, 163, 254, 1), rgba(41, 143, 252, 1));
+            color: #fff;
+            position: relative;
+            page-break-inside: avoid;
+        }
+
+        .logo {
+            width: auto;
+            height: 140px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .title {
+            width: 100%;
+            height: 140px;
+            padding-top: 50px;
+            text-align: center;
+        }
+
+        .title p:nth-of-type(1) {
+            font-size: 36px;
+            line-height: 36px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .zongshu {
+            page-break-inside: avoid;
+        }
+
+        .fengxianxinxi {
+            border: 1px solid #DFE6EC;
+            width: 720px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        h6 {
+            margin-top: 40px;
+            font-size: 16px;
+            color: #303133;
+        }
+
+        h6 span {
+            color: #448BD2;
+            border-bottom: 1px solid #448BD2;
+            padding-bottom: 2px;
+        }
+
+        h5 {
+            margin-top: 30px;
+            font-size: 18px;
+            color: #303133;
+            font-weight: 800;
+        }
+
+        .fengxianxinxi h5 span {
+            color: #FA9A3C;
+        }
+
+        table,
+        table tr th,
+        table tr td {
+            width: 120px;
+            border: 1px solid #DFE6EC;
+            padding: 0px 20px;
+        }
+
+        table {
+            width: 720px;
+            margin: 20px auto 0;
+            border-collapse: collapse;
+            padding: 2px;
+            font-size: 14px;
+        }
+
+        thead tr {
+            min-height: 52px;
+            line-height: 52px;
+            text-align: center;
+            background: #F0F2F5;
+        }
+
+        tbody tr {
+            height: 58px;
+        }
+
+        tbody tr td p:nth-of-type(2) {
+            font-size: 14px;
+            color: red;
+            /* text-align: right; */
+        }
+
+        .OrgInfoTitle {
+            margin-top: 40px;
+            overflow: hidden;
+        }
+
+        .OrgInfoTitle p {
+            width: 4px;
+            height: 16px;
+            margin: 4px 10px 0 0;
+            float: left;
+            background: #448BD2;
+        }
+
+        .OrgInfoTitle h6 {
+            float: left;
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            color: #303133;
+            font-weight: 900;
+        }
+
+        .OrgInfoBox {
+            page-break-inside: avoid;
+        }
+
+        .OrgInfoBox table {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .OrgInfoBox table tbody td {
+            padding: 10px 20px;
+        }
+
+        .OrgInfoBox table td:nth-of-type(4) {
+            width: 360px;
+        }
+
+        .biandongtiaozhuan {
+            width: 720px;
+            text-align: center;
+            color: #448BD2;
+            font-size: 14px;
+            margin: 20px 0;
+        }
+
+        .biandongtiaozhuan a {
+            text-decoration: none;
+            outline: none;
+            color: #448BD2;
+        }
+
+        .xinzaiJianyi {
+            width: 700px;
+            height: 90px;
+            padding-left: 20px;
+            background: rgba(241, 248, 255, 1);
+            border: 1px solid rgba(220, 239, 255, 1);
+        }
+
+        .xinzaiJianyi p {
+            font-size: 16px;
+            color: #448BD2;
+            margin: 20px 0;
+        }
+
+        .xinzaiJianyi h6 {
+            margin: 0;
+            font-size: 14px;
+            color: #303133;
+        }
+
+        .goSass {
+            width: 720px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 800;
+            color: #448BD2;
+            margin: 40px 0;
+        }
+
+        .goSass a {
+            text-decoration: none;
+            outline: none;
+            color: #448BD2;
+        }
+
+        .footer {
+            width: 720px;
+            height: 100px;
+            margin: 0 auto;
+            padding: 0 40px;
+            color: #fff;
+            font-size: 14px;
+            padding-top: 50px;
+            page-break-inside: avoid;
+            background: linear-gradient(180deg, rgba(70, 163, 254, 1), rgba(41, 143, 252, 1));
+        }
+
+        .footer div {
+            float: left;
+            margin-left: 20px;
+        }
+
+        .footer4 {
+            width: 154px;
+        }
+
+        #container {
+            width: 800px;
+            height: 600px;
+            margin: 0 auto;
+            page-break-inside: avoid;
+        }
+
+        /* .footer .footer1{
+          width:100px;
+        }
+        .footer .footer2{
+          width:162px
+        }
+        .footer .footer3{
+          width:224px;
+        } */
+    </style>
+</head>
+
+<body>
+<div class="jiankongribao">
+    <!-- 头部 -->
+    <div class="header">
+        <div class="logo">
+            <p>信用视界——专业版</p>
+            <p>www.x315.com</p>
+        </div>
+        <div class="title">
+            <p>监控日报</p>
+            <p>
+                <span>本日报产生于</span>
+                <span id="date">--</span>
+            </p>
+        </div>
+    </div>
+    <div class="fengxianxinxi">
+        <h6>尊敬的<span id="userName">王晓东</span>用户您好：</h6>
+        <h5>您所监控的企业共<span>&nbsp;2&nbsp;</span>家发生变动，信仔为您采集到<span>&nbsp;31&nbsp;</span>条变动信息：</h5>
+        <table class="zongshu">
+            <thead>
+            <tr>
+                <td>注册变更</td>
+                <td>法律诉讼</td>
+                <td>行政监管</td>
+                <td>经营状况</td>
+                <td>知识产权</td>
+                <td>新闻舆情</td>
+            </tr>
+            </thead>
+            <tr>
+                <td>
+                    <p>8条</p>
+                    <p>(风险：2条)</p>
+                </td>
+                <td>
+                    <p>——</p>
+                </td>
+                <td>
+                    <p>9条</p>
+                </td>
+                <td>
+                    <p>——</p>
+                </td>
+                <td>
+                    <p>——</p>
+                </td>
+                <td>
+                    <p>10条</p>
+                    <p>(负面：2条)</p>
+                </td>
+            </tr>
+        </table>
+        <div class="OrgInfo">
+
+        </div>
+        <div class="goSass">
+            <a href="">请前往信用视界查看更多变动信息 >>></a>
+        </div>
+    </div>
+    <div id="container" style="width: 400px;height: 600px"></div>
+    <!-- footer -->
+    <div class="footer">
+        <div class="footer1">
+            二维码
+        </div>
+        <div class="footer2">
+            <p>联系电话：400-800-7975</p>
+            <p>客服QQ：328303153</p>
+        </div>
+        <div class="footer3">
+            <p>官网网址：<a href="www.x315.com">www.x315.com</a></p>
+            <p>客服邮箱：<span>service@gladtrust.com</span></p>
+        </div>
+        <div class="footer4">
+            <p>
+                <i>*</i>
+                <span>本邮件无需回复</span>
+            </p>
+            <p>有任何疑问？请联系我们信用视界运营团队</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    $(function () {
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        // var weatherIcons = {
+        //   'Sunny': ROOT_PATH + 'data/asset/img/weather/sunny_128.png',
+        //   'Cloudy': ROOT_PATH + 'data/asset/img/weather/cloudy_128.png',
+        //   'Showers': ROOT_PATH + 'data/asset/img/weather/showers_128.png'
+        // };
+
+        option = {
+            title: {
+                text: '天气情况统计',
+                subtext: '虚构数据',
+                left: 'center'
+            },
+            animation: false,
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                // orient: 'vertical',
+                // top: 'middle',
+                bottom: 10,
+                left: 'center',
+                data: ['西凉', '益州', '兖州', '荆州', '幽州']
+            },
+            series: [{
+                type: 'pie',
+                radius: '65%',
+                center: ['50%', '50%'],
+                selectedMode: 'single',
+                data: [{
+                    value: 1548,
+                    name: '幽州',
+                    label: {
+                        normal: {
+                            formatter: [
+                                '{title|{b}}{abg|}',
+                                '  {weatherHead|天气}{valueHead|天数}{rateHead|占比}',
+                                '{hr|}',
+                                '  {Sunny|}{value|202}{rate|55.3%}',
+                                '  {Cloudy|}{value|142}{rate|38.9%}',
+                                '  {Showers|}{value|21}{rate|5.8%}'
+                            ].join('\n'),
+                            backgroundColor: '#eee',
+                            borderColor: '#777',
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            rich: {
+                                title: {
+                                    color: '#eee',
+                                    align: 'center'
+                                },
+                                abg: {
+                                    backgroundColor: '#333',
+                                    width: '100%',
+                                    align: 'right',
+                                    height: 25,
+                                    borderRadius: [4, 4, 0, 0]
+                                },
+                                Sunny: {
+                                    height: 30,
+                                    align: 'left',
+                                    backgroundColor: {
+                                        // image: weatherIcons.Sunny
+                                    }
+                                },
+                                Cloudy: {
+                                    height: 30,
+                                    align: 'left',
+                                    backgroundColor: {
+                                        // image: weatherIcons.Cloudy
+                                    }
+                                },
+                                Showers: {
+                                    height: 30,
+                                    align: 'left',
+                                    backgroundColor: {
+                                        // image: weatherIcons.Showers
+                                    }
+                                },
+                                weatherHead: {
+                                    color: '#333',
+                                    height: 24,
+                                    align: 'left'
+                                },
+                                hr: {
+                                    borderColor: '#777',
+                                    width: '100%',
+                                    borderWidth: 0.5,
+                                    height: 0
+                                },
+                                value: {
+                                    width: 20,
+                                    padding: [0, 20, 0, 30],
+                                    align: 'left'
+                                },
+                                valueHead: {
+                                    color: '#333',
+                                    width: 20,
+                                    padding: [0, 20, 0, 30],
+                                    align: 'center'
+                                },
+                                rate: {
+                                    width: 40,
+                                    align: 'right',
+                                    padding: [0, 10, 0, 0]
+                                },
+                                rateHead: {
+                                    color: '#333',
+                                    width: 40,
+                                    align: 'center',
+                                    padding: [0, 10, 0, 0]
+                                }
+                            }
+                        }
+                    }
+                },
+                    {
+                        value: 535,
+                        name: '荆州'
+                    },
+                    {
+                        value: 510,
+                        name: '兖州'
+                    },
+                    {
+                        value: 634,
+                        name: '益州'
+                    },
+                    {
+                        value: 735,
+                        name: '西凉'
+                    }
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }]
+        };
+        ;
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    })
+</script>
+<script>
+    window.onload = function () {
+        document.getElementById("date").innerHTML = (formatDateTime())
+        for (var i = 0; i <= 10; i++) {
+            var node = $(
+                '<div class="OrgInfoBox"><div class="OrgInfoTitle">' +
+                '<p></p>' +
+                '<h6>青岛格兰德信息管理咨询有限公司</h6>' +
+                '</div>' +
+                '<table>' +
+                '<thead>' +
+                '<tr>' +
+                '<td>风险类型</td>' +
+                '<td>监控维度</td>' +
+                '<td>发生时间</td>' +
+                '<td>监控内容</td>' +
+                '</tr>' +
+                '</thead>' +
+                '<tbody>' +
+                '<tr>' +
+                '<td>警示消息</td>' +
+                '<td>实际控制人变更</td>' +
+                '<td>2019-10-22</td>' +
+                '<td>新增青岛格兰德信用管理咨询有限公司与彭育洲、浙 江淘宝网络有限公司侵害商标权纠纷一审民事裁定书</td>' +
+                ' </tr>' +
+                '</tbody>' +
+                '</table>' +
+                '<div class="biandongtiaozhuan">' +
+                ' <a href="">共 11 条变动，其中 2 条风险 >></a>' +
+                '</div>' +
+                '<div class="xinzaiJianyi">' +
+                '<p>信仔建议：</p>' +
+                '<h6>法定代表人、股东、高管频繁发生变更，企业可能发生战略改变或经营出现问题，提请注意把控风险。</h6>' +
+                '</div>' +
+                '</div>'
+            )
+            node.appendTo(".OrgInfo")
+        }
+
+        //*获取当前时间并转为常用日期格式
+        function formatDateTime() {
+            var date = new Date();
+            var YYYY = date.getFullYear();
+            var MM = date.getMonth() + 1;
+            var DD = date.getDate();
+            var hh = date.getHours();
+            var mm = date.getMinutes();
+            var ss = date.getSeconds();
+
+            MM = MM < 10 ? ('0' + MM) : MM;
+            DD = DD < 10 ? ('0' + DD) : DD;
+            hh = hh < 10 ? ('0' + hh) : hh;
+            mm = mm < 10 ? ('0' + mm) : mm;
+            ss = ss < 10 ? ('0' + ss) : ss;
+
+            return YYYY + '-' + MM + '-' + DD + ' ' + hh + ':' + mm + ':' + ss;
+        }
+    }
+</script>
