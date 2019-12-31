@@ -6,12 +6,13 @@ var page = require('webpage').create(),
     marginBottom = '0cm',
     marginLeft = '0cm',
     sourcePath = system.args[1],
-    targetPath = system.args[2],
     headerHeight = '0cm',
     footerHeight = '0cm',
-    operatingSystem = system.args[3],
-    jsWait = 10000,
-    jsInterval = 1000,
+    operatingSystem = system.args[2],
+    reportPath = system.args[3],
+    targetPath = system.args[4],
+    jsWait = 100000,
+    jsInterval = 10000,
     viewportWidth = '1920',
     viewportHeight = '1080';
 
@@ -116,13 +117,15 @@ var renderIfDone = function renderIfDone() {
     setTimeout(function () {
         if (done()) {
             log("开始生成");
-      /*      //把渲染后的网页源码打印出来
+            //把渲染后的网页源码打印出来
             var sc = page.evaluate(function() {
                 return "<!DOCTYPE html>\n" +
                     "<html lang=\"en\">"+document.getElementsByTagName('html')[0].innerHTML+"</html>";
             });
-            fs.write(reportPath, sc);*/
+            log(sc);
+            fs.write(reportPath, sc);
             renderPage();
+            phantom.exit(0);
         } else {
             if (waited > jsWait) {
                 err('Timed out on JavaScript execution');

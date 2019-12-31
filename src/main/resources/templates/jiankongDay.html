@@ -264,14 +264,14 @@
         }
 
         /* .footer .footer1{
-          width:100px;
-        }
-        .footer .footer2{
-          width:162px
-        }
-        .footer .footer3{
-          width:224px;
-        } */
+              width:100px;
+            }
+            .footer .footer2{
+              width:162px
+            }
+            .footer .footer3{
+              width:224px;
+            } */
     </style>
 </head>
 
@@ -335,7 +335,10 @@
             <a href="">请前往信用视界查看更多变动信息 >>></a>
         </div>
     </div>
-    <div id="container" style="width: 400px;height: 600px"></div>
+    <div id="container" style="width: 800px;height: 600px;display: none;"></div>
+    <div style="width: 800px;height: 600px;margin: 20px auto">
+        <img id="img" src="" alt="" style="width:100%">
+    </div>
     <!-- footer -->
     <div class="footer">
         <div class="footer1">
@@ -359,6 +362,7 @@
     </div>
 </div>
 </body>
+
 </html>
 <script type="text/javascript">
     $(function () {
@@ -505,13 +509,31 @@
                         shadowOffsetX: 0,
                         shadowColor: 'rgba(0, 0, 0, 0.5)'
                     }
-                }
+                },
+                animation: false
             }]
         };
-        ;
         if (option && typeof option === "object") {
             myChart.setOption(option, true);
+
         }
+        var img = new Image()
+        img.src = myChart.getDataURL({
+            pixelRatio: 2,
+            backgroundColor: '#fff'
+        })
+        $("#img").attr('src', img.src)
+
+        // console.log("image",img.src);
+        function f() {
+            var f = document.createElement("div");
+            f.id = "fi";
+            f.style.display = 'none';
+            f.innerText = "finish";
+            document.body.appendChild(f);
+        }
+
+        f();
     })
 </script>
 <script>
@@ -551,6 +573,7 @@
                 '</div>'
             )
             node.appendTo(".OrgInfo")
+
         }
 
         //*获取当前时间并转为常用日期格式
